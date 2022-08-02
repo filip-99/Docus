@@ -17,6 +17,6 @@ namespace CandidateApp.Data
         }
         // Sada vršimo referenciranje model klase sa tabelom u bazi podataka
         // Promenjiva će biti tipa DbSet i nazvaćemo je kao tabelu u bazi Books. Sada možemo manipulisati tabelom uz pomoć ovog naziva "Books"
-        public DbSet<Candidate> Books { get; set; }
+        public DbSet<Candidate> Candidates { get; set; }
     }
 }
