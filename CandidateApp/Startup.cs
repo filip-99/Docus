@@ -1,4 +1,4 @@
-using CandidateApp.Data;
+﻿using CandidateApp.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -18,7 +18,7 @@ namespace CandidateApp
 {
     public class Startup
     {
-        // Deklari�emo promenjivu u koju sme�tamo putanju ka bazi
+        // Deklarišemo promenjivu u koju smeštamo putanju ka bazi
         public string ConnectionString { get; set; }
 
         public Startup(IConfiguration configuration)
@@ -38,7 +38,7 @@ namespace CandidateApp
 
             services.AddControllers();
 
-            // Nastavljamo dalje sa konfiguracijom baze, sada je potrebno da odmah ispod services.AddControllers(); izvr�imo konfiguraciju konteksta sa SQL bazom podataka
+            // Nastavljamo dalje sa konfiguracijom baze, sada je potrebno da odmah ispod services.AddControllers(); izvršimo konfiguraciju konteksta sa SQL bazom podataka
             // Potrebno je da instaliramo i Microsoft.EntityFrameworkCore.SqlServer verziju 5.0.17 zbog .Net Core SDK verzije 5
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConnectionString));
 
@@ -68,6 +68,11 @@ namespace CandidateApp
             {
                 endpoints.MapControllers();
             });
+
+            // Sada u Configure metodi inicializujemo naša bazu podataka tj.. ubacujemo u nju podatke iz klase "AppDbInitializer"
+            // Tačnije u toj klasi se nalazi metoda Seed() sa prosleđenom promenjivom tipa IApplicationBuilder
+            // Dakle kada startujemo program okinuće se ubacivanje u bazu podataka
+            AppDbInitializer.Seed(app);
         }
     }
 }
