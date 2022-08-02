@@ -7,5 +7,6 @@ namespace CandidateApp.Data.Services
 {
     public class CandidatesService
     {
+
     }
 }
