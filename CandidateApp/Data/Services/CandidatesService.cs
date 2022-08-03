@@ -19,6 +19,10 @@ namespace CandidateApp.Data.Services
             _context = context;
         }
 
+        // Sada je potrebno da kreiramo metodu koja će prikazati sve podatke iz baze
+        // Metoda je tipa List<> je vraća listu kandidata iz baze
+        public List<Candidate> GetAllCandidates() => _context.Candidates.ToList();
+
         // Pošto želimo da ubacimo podatke u bazu kreiramo metodu:
         public void AddBook(CandidateVM candidate)
         {
