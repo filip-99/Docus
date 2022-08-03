@@ -11,6 +11,7 @@ namespace CandidateApp.Data
     public class AppDbContext : DbContext
     {
         // Kreiramo konstruktor i da bi uključio potrebne elemente u njega, treba da izgleda ovako:
+        // Sada u konstruktoru definišemo da pomoću ove klase AppDbContext možemo koristiti sve članove osnovne klase u ovoj izvedenoj klasi pa zato ovo base(options)
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 

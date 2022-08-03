@@ -61,5 +61,11 @@ namespace CandidateApp.Controllers
             // Ok() - ovo je samo jedan od tipova koje metoda može da vrati
             return Ok();
         }
+
+        [HttpPut("update-book-by-id/{id}")]
+        public IActionResult UpdateCandidateById(int id, [FromBody] CandidateVM candidate){
+            var updateCandidate = _candidatesService.UpdateCandidateById(id, candidate);
+            return Ok(updateCandidate);
+        }
     }
 }
