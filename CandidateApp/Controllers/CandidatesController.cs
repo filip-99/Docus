@@ -22,6 +22,33 @@ namespace CandidateApp.Controllers
             _candidatesService = candidatesService;
         }
 
+        // Kreiramo HTTP metodu za prikaz svih kandidata u bazi
+        // Nazvaćemo API krajnju tačku get-all-candidates
+        [HttpGet("get-all-candidates")]
+        public IActionResult GetAllCandidates()
+        {
+            var allCandidates = _candidatesService.GetAllCandidates();
+            return Ok(allCandidates);
+        }
+
+        // Kreiramo sada API End-Point tj. krajnju tačku za vraćanje samo jednog kandidata iz baze
+        // Kroz HttpGet zahtev prosleđujemo id da bi dobili podatke o kandidatu sa tim id-em
+        // Bitno je da bude tačan naziv jer će API End-Point morati da mapira parametar sa parametrom u metodi
+        [HttpGet("get-candidate-by-id/{id}")]
+        public IActionResult GetCandidateById(int id)
+        {
+            var candidate = _candidatesService.GetCandidateById(id);
+            return Ok(candidate);
+        }
+
+        // Kreiranje API End-Pointa koji vraća aktivne kandidate
+        [HttpGet("get-candidate-is-active")]
+        public IActionResult GetActiveCandidates()
+        {
+            var candidate = _candidatesService.GetActiveCandidates(true);
+            return Ok(candidate);
+        }
+
         // Sada će mo implementirati EndPoint tj. krajnje tačke
         // Prva će biti HttpPost jer šaljemo podatke u bazu
         // Da bi osigurali da se radi baš o ovoj krajnjoj tački dodelićemo naziv
