@@ -29,6 +29,24 @@ namespace CandidateApp.Data.Services
         // Kreiramo metodu za prikazivanje svih aktivnih kandidata
         public List<Candidate> GetActiveCandidates(bool candidateIsActive) => _context.Candidates.ToList().FindAll(n => n.Active == candidateIsActive);
 
+        public Candidate UpdateCandidateById (int id, CandidateVM candidate)
+        {
+            var _candidate = _context.Candidates.FirstOrDefault(n => n.Id == id);
+            if(_candidate != null)
+            {
+                _candidate.Name = candidate.Name;
+                _candidate.EmailId = candidate.EmailId;
+                _candidate.PhoneNumber = candidate.PhoneNumber;
+                _candidate.AdressLine1 = candidate.AdressLine1;
+                _candidate.AdressLine2 = candidate.AdressLine2;
+                _candidate.Active = candidate.Active;
+
+                _context.SaveChanges();
+            }
+            // Kao rezultat vraćamo apdejtovan red u tabeli
+            return _candidate;
+        }
+        
         // Pošto želimo da ubacimo podatke u bazu kreiramo metodu:
         public void AddBook(CandidateVM candidate)
         {
