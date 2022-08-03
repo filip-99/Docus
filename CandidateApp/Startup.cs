@@ -1,4 +1,5 @@
 ﻿using CandidateApp.Data;
+using CandidateApp.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -41,6 +42,10 @@ namespace CandidateApp
             // Nastavljamo dalje sa konfiguracijom baze, sada je potrebno da odmah ispod services.AddControllers(); izvršimo konfiguraciju konteksta sa SQL bazom podataka
             // Potrebno je da instaliramo i Microsoft.EntityFrameworkCore.SqlServer verziju 5.0.17 zbog .Net Core SDK verzije 5
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConnectionString));
+
+            // Potrebno je da konfigurišemo servis klasu BooksService.cs
+            // Pa će mo koristiti servis, koji omogućava prelaz parametra u bazu
+            services.AddTransient<CandidatesService>();
 
             services.AddSwaggerGen(c =>
             {
