@@ -26,6 +26,9 @@ namespace CandidateApp.Data.Services
         // Sada kreiramo metodu za odabir jednog kandidata iz baze na osnovu njegove aktivnost
         public Candidate GetCandidateById (int candidateId) => _context.Candidates.FirstOrDefault(n => n.Id == candidateId);
 
+        // Kreiramo metodu za prikazivanje svih aktivnih kandidata
+        public List<Candidate> GetActiveCandidates(bool candidateIsActive) => _context.Candidates.ToList().FindAll(n => n.Active == candidateIsActive);
+
         // Pošto želimo da ubacimo podatke u bazu kreiramo metodu:
         public void AddBook(CandidateVM candidate)
         {
