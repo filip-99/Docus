@@ -23,6 +23,9 @@ namespace CandidateApp.Data.Services
         // Metoda je tipa List<> je vraća listu kandidata iz baze
         public List<Candidate> GetAllCandidates() => _context.Candidates.ToList();
 
+        // Sada kreiramo metodu za odabir jednog kandidata iz baze na osnovu njegove aktivnost
+        public Candidate GetCandidateById (int candidateId) => _context.Candidates.FirstOrDefault(n => n.Id == candidateId);
+
         // Pošto želimo da ubacimo podatke u bazu kreiramo metodu:
         public void AddBook(CandidateVM candidate)
         {
