@@ -63,9 +63,17 @@ namespace CandidateApp.Controllers
         }
 
         [HttpPut("update-book-by-id/{id}")]
-        public IActionResult UpdateCandidateById(int id, [FromBody] CandidateVM candidate){
+        public IActionResult UpdateCandidateById(int id, [FromBody] CandidateVM candidate) {
             var updateCandidate = _candidatesService.UpdateCandidateById(id, candidate);
             return Ok(updateCandidate);
+        }
+
+        // Kreiramo zahtev za brisanje podataka iz baze
+        [HttpDelete("delete-candidate-by-id/{id}")]
+        public IActionResult DeleteCandidateById(int id)
+        {
+            _candidatesService.DeleteCandidateById(id);
+            return Ok();
         }
     }
 }
