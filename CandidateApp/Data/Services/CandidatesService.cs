@@ -65,5 +65,18 @@ namespace CandidateApp.Data.Services
             _context.Candidates.Add(_candidate);
             _context.SaveChanges();
         }
+
+        // Kreiramo metodu za brisanje podataka iz baze
+        // Metoda će biti void jer ne želimo da nam vraća izbrisanog kandidata
+        public void DeleteCandidateById(int candidateId)
+        {
+            var _candidate = _context.Candidates.FirstOrDefault(n => n.Id == candidateId);
+            if (_candidate != null)
+            {
+                // Sada kada promenjiva _candidate referencira na red u tabeli sa zadatim ID-em, obrisaćemo taj red iz baze
+                _context.Candidates.Remove(_candidate);
+                _context.SaveChanges();
+            }
+        }
     }
 }
