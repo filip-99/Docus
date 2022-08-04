@@ -15,6 +15,8 @@ namespace CandidateApp.Data.Models
         public string? AdressLine1 { get; set; }
         public string? AdressLine2 { get; set; }
         public bool? Active { get; set; }
-        #nullable disable
+#nullable disable
+
+        public List<FormAction> FormAction { get; set; }
     }
 }
