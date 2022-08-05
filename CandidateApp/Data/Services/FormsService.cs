@@ -18,12 +18,12 @@ namespace CandidateApp.Data.Services
 
         public void AddForm(FormVM form)
         {
-            var _form = new Candidate()
+            var _form = new Form()
             {
                 Name = form.Name,
                 Active = form.Active
             };
-            _context.Candidates.Add(_form);
+            _context.Forms.Add(_form);
             _context.SaveChanges();
         }
     }

@@ -46,6 +46,7 @@ namespace CandidateApp
             // Potrebno je da konfigurišemo servis klasu BooksService.cs
             // Pa će mo koristiti servis, koji omogućava prelaz parametra u bazu
             services.AddTransient<CandidatesService>();
+            services.AddTransient<FormsService>();
 
             services.AddSwaggerGen(c =>
             {
@@ -77,7 +78,7 @@ namespace CandidateApp
             // Sada u Configure metodi inicializujemo naša bazu podataka tj.. ubacujemo u nju podatke iz klase "AppDbInitializer"
             // Tačnije u toj klasi se nalazi metoda Seed() sa prosleđenom promenjivom tipa IApplicationBuilder
             // Dakle kada startujemo program okinuće se ubacivanje u bazu podataka
-            AppDbInitializer.Seed(app);
+            // AppDbInitializer.Seed(app);
         }
     }
 }
