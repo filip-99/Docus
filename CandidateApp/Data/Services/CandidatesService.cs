@@ -1,4 +1,5 @@
-﻿using CandidateApp.Data.Models;
+﻿using CandidateApp.Data.DataModel;
+using CandidateApp.Data.Models;
 using CandidateApp.Data.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,15 +14,17 @@ namespace CandidateApp.Data.Services
         // Prvo će mo imati metodu za ubacivanje knjiga u bazi
         // Ovo će mo uraditi znači preko kontekst klase, jer ona komunicira sa bazom. Pa kreiramo najpre objekat, pa konstruktor sa ovim poljem
         private AppDbContext _context;
+        private CandidatesData _candidatesData;
 
-        public CandidatesService(AppDbContext context)
+        public CandidatesService(AppDbContext context, CandidatesData candidatesData)
         {
             _context = context;
+            _candidatesData = candidatesData;
         }
 
         // Sada je potrebno da kreiramo metodu koja će prikazati sve podatke iz baze
         // Metoda je tipa List<> je vraća listu kandidata iz baze
-        public List<Candidate> GetAllCandidates() => _context.Candidates.ToList();
+        public List<Candidate> GetAllCandidates() => _candidatesData.GetAllCandidates();
 
         // Sada kreiramo metodu za odabir jednog kandidata iz baze na osnovu njegove aktivnost
         public Candidate GetCandidateById (int candidateId) => _context.Candidates.FirstOrDefault(n => n.Id == candidateId);
