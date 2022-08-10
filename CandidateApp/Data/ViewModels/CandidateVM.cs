@@ -20,4 +20,19 @@ namespace CandidateApp.Data.ViewModels
 
         public List<int> FormsId{ get; set; }
     }
+
+
+    public class CandidateWithFormsVM
+    {
+        public String Name { get; set; }
+        public string EmailId { get; set; }
+#nullable enable
+        public string? PhoneNumber { get; set; }
+        public string? AdressLine1 { get; set; }
+        public string? AdressLine2 { get; set; }
+        public bool? Active { get; set; }
+#nullable disable
+
+        public List<string> FormsName { get; set; }
+    }
 }
