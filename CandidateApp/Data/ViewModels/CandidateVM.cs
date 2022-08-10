@@ -17,5 +17,7 @@ namespace CandidateApp.Data.ViewModels
         public string? AdressLine2 { get; set; }
         public bool? Active { get; set; }
 #nullable disable
+
+        public List<int> FormsId{ get; set; }
     }
 }
