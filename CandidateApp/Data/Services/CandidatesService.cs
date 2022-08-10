@@ -24,15 +24,28 @@ namespace CandidateApp.Data.Services
         public List<Candidate> GetAllCandidates() => _context.Candidates.ToList();
 
         // Sada kreiramo metodu za odabir jednog kandidata iz baze na osnovu njegove aktivnost
-        public Candidate GetCandidateById (int candidateId) => _context.Candidates.FirstOrDefault(n => n.Id == candidateId);
+        public CandidateWithFormsVM GetCandidateWithFormById(int candidateId)
+        {
+            var _candidateWithForm = _context.Candidates.Where(n => n.Id == candidateId).Select(candidate => new CandidateWithFormsVM()
+            {
+                Name = candidate.Name,
+                EmailId = candidate.EmailId,
+                PhoneNumber = candidate.PhoneNumber,
+                AdressLine1 = candidate.AdressLine1,
+                AdressLine2 = candidate.AdressLine2,
+                Active = candidate.Active,
+                FormsName = candidate.FormAction.Select(n => n.Form.Name).ToList()
+            }).FirstOrDefault();
+            return _candidateWithForm;
+        }
 
         // Kreiramo metodu za prikazivanje svih aktivnih kandidata
         public List<Candidate> GetActiveCandidates(bool candidateIsActive) => _context.Candidates.ToList().FindAll(n => n.Active == candidateIsActive);
 
-        public Candidate UpdateCandidateById (int id, CandidateVM candidate)
+        public Candidate UpdateCandidateById(int id, CandidateVM candidate)
         {
             var _candidate = _context.Candidates.FirstOrDefault(n => n.Id == id);
-            if(_candidate != null)
+            if (_candidate != null)
             {
                 _candidate.Name = candidate.Name;
                 _candidate.EmailId = candidate.EmailId;
@@ -46,7 +59,7 @@ namespace CandidateApp.Data.Services
             // Kao rezultat vraćamo apdejtovan red u tabeli
             return _candidate;
         }
-        
+
         // Pošto želimo da ubacimo podatke u bazu kreiramo metodu:
         public void AddCandidateWithForms(CandidateVM candidate)
         {
