@@ -48,7 +48,7 @@ namespace CandidateApp.Data.Services
         }
         
         // Pošto želimo da ubacimo podatke u bazu kreiramo metodu:
-        public void AddBook(CandidateVM candidate)
+        public void AddCandidateWithForms(CandidateVM candidate)
         {
             // Kreiraćemo objekat modela knjige tj. Model Book
             // Možemo pisati Book ili var kao što je navedeno
@@ -64,6 +64,17 @@ namespace CandidateApp.Data.Services
             // Sada kada smo uzeli prosleđene podatke funkciji, dodelili im vrednosti, potrebno je da ih prosledimo kontekst klasi
             _context.Candidates.Add(_candidate);
             _context.SaveChanges();
+
+            foreach (var id in candidate.FormsId)
+            {
+                var _form_action = new FormAction()
+                {
+                    CandidateId = _candidate.Id,
+                    FormId = id
+                };
+                _context.FormsActions.Add(_form_action);
+                _context.SaveChanges();
+            }
         }
 
         // Kreiramo metodu za brisanje podataka iz baze
