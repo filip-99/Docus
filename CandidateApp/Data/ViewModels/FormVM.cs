@@ -10,4 +10,11 @@ namespace CandidateApp.Data.ViewModels
         public string Name { get; set; }
         public bool Active { get; set; }
     }
+
+    public class FormWithCandidatesVM
+    {
+        public string Name { get; set; }
+        public List<string> CandidateName { get; set; }
+
+    }
 }
