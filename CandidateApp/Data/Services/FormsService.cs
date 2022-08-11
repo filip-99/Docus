@@ -26,5 +26,15 @@ namespace CandidateApp.Data.Services
             _context.Forms.Add(_form);
             _context.SaveChanges();
         }
+
+        public FormWithCandidatesVM GetFormWithCandidates(int formId)
+        {
+            var _form = _context.Forms.Where(form => form.Id == formId).Select(n => new FormWithCandidatesVM()
+            {
+                Name = n.Name,
+                CandidateName = n.FormAction.Select(n => n.Candidate.Name).ToList()
+            }).FirstOrDefault();
+            return _form;
+        }
     }
 }
