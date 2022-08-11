@@ -28,5 +28,12 @@ namespace CandidateApp.Controllers
             _formsService.AddForm(form);
             return Ok();
         }
+
+        [HttpGet("get-form-with-candidates-by-id/{id}")]
+        public IActionResult GetFormWithCandidatesById(int id)
+        {
+            var response = _formsService.GetFormWithCandidates(id);
+            return Ok(response);
+        }
     }
 }
